@@ -3,21 +3,19 @@
 #include "functions.h"
 
 int main() {
-    const int rowsA = 2, colsA = 3;
-    const int rowsB = 3, colsB = 2;
-    int A[rowsA * colsA] = {1, 2, 3, 4, 5, 6};
-    int B[rowsB * colsB] = {7, 8, 9, 10, 11, 12};
-    int C[rowsA * colsB] = {};
+    /* 1. Input is an un-directed graph, power parameter e, and inflation parameter r.*/
 
-    multiplyMatrices(A, B, C, rowsA, colsA, colsB);
+    /* 2. Create the associated matrix*/
 
-    std::cout << "Result matrix:\n";
-    for (int i = 0; i < rowsA; ++i) {
-        for (int j = 0; j < colsB; ++j) {
-            std::cout << C[i * colsB + j] << " ";
-        }
-        std::cout << "\n";
-    }
+    /* 3. Add self loops to each node (optional)*/
 
-    return 0;
+    /* 4. Normalize the Matrix*/
+
+    /* 5. Expand by taking the e-th power of the matrix*/
+
+    /* 6. Inflate by taking inflation of the resulting matrix with parameter r*/
+
+    /* 7. Repeat steps 5 and 6 until a steady state is reached (convergence)*/
+
+    /* (Optional) 8. Iterpret resulting matrix to discover clusters*/
 }
