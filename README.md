@@ -1,0 +1,2 @@
+# Komparawrrr
+Project Komputasi Paralel
