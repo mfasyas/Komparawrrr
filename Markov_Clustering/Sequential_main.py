@@ -5,22 +5,24 @@ from graph import Graph
 '''
 This is the code to run the main program
 
-    /* 1. Input is an un-directed graph, power parameter e, and inflation parameter r.*/
-    Done
+    The algorithm given by:
 
-    /* 2. Create the associated matrix*/
+    /* 1. Input is an un-directed graph, power parameter e, and inflation parameter r. */
+    Done by Defining Class Object Graph and adding power parameter and inflation as input
+
+    /* 2. Create the associated matrix */
 
     /* 3. Add self loops to each node (optional)*/
 
-    /* 4. Normalize the Matrix*/
+    /* 4. Normalize the Matrix */
 
-    /* 5. Expand by taking the e-th power of the matrix*/
+    /* 5. Expand by taking the e-th power of the matrix */
 
-    /* 6. Inflate by taking inflation of the resulting matrix with parameter r*/
+    /* 6. Inflate by taking inflation of the resulting matrix with parameter r */
 
-    /* 7. Repeat steps 5 and 6 until a steady state is reached (convergence)*/
+    /* 7. Repeat steps 5 and 6 until a steady state is reached (convergence) */
 
-    /* (Optional) 8. Iterpret resulting matrix to discover clusters*/
+    /* (Optional) 8. Iterpret resulting matrix to discover clusters */
 
 '''
 
@@ -40,7 +42,123 @@ def multiply(matrix_a, matrix_b):
 
     return result
 
+# Power of Matrix
+def powerMatrix(matrix, n):
+    if n < 1:
+        raise ValueError
+        return None
 
+    matrix1, matrix2 = matrix, matrix
 
+    for i in range(n-1):
+        result = multiply(matrix1, matrix2) # Sequential Part
+        matrix1 = result
 
+    return result
+
+    # Note: Input of matrix is always square matrix, no power of zero
+
+# Matrix Normalization
+def Normalize(matrix):
+    matrix2 = matrix
+
+    for j in range(len(matrix2[0])):
+        temp = 0
+        for i in range(len(matrix2)):
+            temp += matrix2[i][j]
+
+        for i in range(len(matrix2)):
+            matrix2[i][j] = matrix2[i][j] / temp
+        
+        return matrix2
+    
+# Inflation of Matrix
+def Inflate(matrix, r):
+    matrix2 = matrix
+
+    for j in range(len(matrix2[0])):
+        sum = 0
+        for i in range(len(matrix2[0])):
+            matrix2[i][j] = matrix2[i][j] ** r
+            sum += matrix2[i][j]
+
+        for i in range(len(matrix2[0])):
+            matrix2[i][j] = matrix2[i][j] / sum
+
+    return matrix2
+
+def MarkovCluster(graph, e, r):
+    matrix, indexmap = graph.to_adjacency_matrix()
+
+    for i in range(len(matrix)):
+        matrix[i][i] = 1
+
+    matrix = Normalize(matrix)
+
+    iterate = 5
+    ptr = 0
+
+    while ptr <= 5:
+
+        matrix = powerMatrix(matrix, n = e) # Exponent
+
+        matrix = Inflate(matrix, r)
+
+        ptr += 1
+
+    return matrix
 #==================================== Main Program ====================================
+
+# Parameter
+n_nodes = 5  # Number of nodes in graph
+n_edge = 6   # Number of edge in graph
+
+e = 2 # Power Parameter
+r = 2 # Inflation Parameter
+
+
+# 1. Input is an un-directed graph, power parameter e, and inflation parameter r.
+graph = Graph(directed = False)
+graph.generate_random_connected_graph(num_nodes = n_nodes, num_edges = n_edge)
+
+'''
+# 2. Create the associated matrix
+matrix, indexmap = graph.to_adjacency_matrix()
+
+# 3. Add self loops to each node (optional)
+
+for i in range(n_nodes):
+    matrix[i][i] = 1
+
+
+# 4. Normalize the Matrix
+
+for j in range(n_nodes):
+    temp = 0
+    for i in range(n_nodes):
+        temp += matrix[i][j]
+
+    for i in range(n_nodes):
+        matrix[i][j] = matrix[i][j] / temp
+
+
+# 5. Expand by taking the e-th power of the matrix 
+new_matrix = powerMatrix(matrix, n = e)
+
+# 6. Inflate by taking inflation of the resulting matrix with parameter r
+for j in range(n_nodes):
+    sum = 0
+    for i in range(n_nodes):
+        new_matrix[i][j] = (new_matrix[i][j] ** r)
+        sum += new_matrix[i][j]
+
+    for i in range(n_nodes):
+        new_matrix[i][j] = new_matrix[i][j] / sum
+
+# 7. Repeat until steady state is reached
+
+'''
+
+MarkovMatrix = MarkovCluster(graph, e, r)
+
+print(MarkovMatrix)
