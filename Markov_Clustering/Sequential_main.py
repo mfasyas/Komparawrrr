@@ -70,7 +70,7 @@ def Normalize(matrix):
         for i in range(len(matrix2)):
             matrix2[i][j] = matrix2[i][j] / temp
         
-        return matrix2
+    return matrix2
     
 # Inflation of Matrix
 def Inflate(matrix, r):
@@ -87,6 +87,7 @@ def Inflate(matrix, r):
 
     return matrix2
 
+# Markov Clustering
 def MarkovCluster(graph, e, r):
     matrix, indexmap = graph.to_adjacency_matrix()
 
@@ -95,18 +96,28 @@ def MarkovCluster(graph, e, r):
 
     matrix = Normalize(matrix)
 
-    iterate = 5
+    iterate = 20
     ptr = 0
 
-    while ptr <= 5:
+    while ptr <= iterate:
 
-        matrix = powerMatrix(matrix, n = e) # Exponent
+        matrix = powerMatrix(matrix, e) # Exponent
+        print(f"Adjacency Matrix Powered steps: {ptr}")
+        print_matrix(matrix)
 
         matrix = Inflate(matrix, r)
+
+        print(f"Adjacency Matrix Inflated steps: {ptr}")
+        print_matrix(matrix)
 
         ptr += 1
 
     return matrix
+
+# Print Matrix
+def print_matrix(matrix):
+    for row in matrix:
+        print(" ".join(map(str, row)))
 #==================================== Main Program ====================================
 
 # Parameter
@@ -119,7 +130,61 @@ r = 2 # Inflation Parameter
 
 # 1. Input is an un-directed graph, power parameter e, and inflation parameter r.
 graph = Graph(directed = False)
-graph.generate_random_connected_graph(num_nodes = n_nodes, num_edges = n_edge)
+
+# graph.generate_random_connected_graph(num_nodes = n_nodes, num_edges = n_edge)
+
+g = Graph(directed=False)
+
+graph = Graph(directed=False)
+
+# Add all nodes (1 to 12)
+for i in range(1, 13):
+    graph.add_node(i)
+
+# Add edges based on the adjacency list
+graph.add_edge(1, 1)
+graph.add_edge(1, 2)
+graph.add_edge(1, 6)
+graph.add_edge(1, 7)
+graph.add_edge(1, 10)
+
+graph.add_edge(2, 2)
+graph.add_edge(2, 3)
+graph.add_edge(2, 5)
+
+graph.add_edge(3, 3)
+graph.add_edge(3, 4)
+graph.add_edge(3, 5)
+
+graph.add_edge(4, 4)
+graph.add_edge(4, 8)
+graph.add_edge(4, 9)
+graph.add_edge(4, 11)
+
+graph.add_edge(5, 5)
+graph.add_edge(5, 7)
+graph.add_edge(5, 8)
+
+graph.add_edge(6, 6)
+graph.add_edge(6, 10)
+
+graph.add_edge(7, 7)
+graph.add_edge(7, 10)
+
+graph.add_edge(8, 8)
+graph.add_edge(8, 9)
+graph.add_edge(8, 11)
+
+graph.add_edge(9, 9)
+graph.add_edge(9, 11)
+graph.add_edge(9, 12)
+
+graph.add_edge(10, 10)
+
+graph.add_edge(11, 11)
+graph.add_edge(11, 12)
+
+graph.add_edge(12, 12)
 
 '''
 # 2. Create the associated matrix
@@ -161,4 +226,5 @@ for j in range(n_nodes):
 
 MarkovMatrix = MarkovCluster(graph, e, r)
 
-print(MarkovMatrix)
+print("Adjacency Matrix of Last Iteration")
+print_matrix(MarkovMatrix)
