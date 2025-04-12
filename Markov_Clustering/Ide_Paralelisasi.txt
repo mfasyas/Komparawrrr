@@ -1,0 +1,6 @@
+Ide paralelisasi
+
+- Paralelisasi perkalian matriks
+- Paralelisasi perpangkatan
+- Paralelisasi Normalized dan Inflated
+- Paralelisasi iterasi Markov Cluster (?)
