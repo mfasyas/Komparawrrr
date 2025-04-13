@@ -4,3 +4,10 @@ Ide paralelisasi
 - Paralelisasi perpangkatan
 - Paralelisasi Normalized dan Inflated
 - Paralelisasi iterasi Markov Cluster (?)
+
+
+- Paralelisasi matriks
+    Ubah graph ke dalam list, dari list ubah ke numpy array,
+    dari numpy array ubah ke cupy array.
+    Hasil dari perkalian matriks dengan cupy array kembalikan
+    ke numpy array, habis itu buat lagi graphnya.
