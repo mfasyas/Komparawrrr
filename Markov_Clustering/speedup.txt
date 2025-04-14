@@ -1,0 +1,19 @@
+simpul = 200
+busur = 700
+	sekuensial = 6.9510 detik
+	paralel = 0.5120 detik
+
+simpul = 300
+busur = 700
+	sekuensial = 26.0662 detik
+	paralel = 0.5110 detik
+
+simpul = 500
+busur = 700
+	sekuensial = 153.2840 detik
+	paralel = 0.7136 detik
+
+simpul = 1000
+busur = 1200
+	sekuensial = 153.2840 detik
+	paralel = 2.0826 detik

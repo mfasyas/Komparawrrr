@@ -1,5 +1,6 @@
 import numpy as np
 from graph import Graph
+import time 
 
 
 '''
@@ -121,8 +122,8 @@ def print_matrix(matrix):
 #==================================== Main Program ====================================
 
 # Parameter
-n_nodes = 5  # Number of nodes in graph
-n_edge = 6   # Number of edge in graph
+n_nodes = 1000  # Number of nodes in graph
+n_edge = 1500   # Number of edge in graph
 
 e = 2 # Power Parameter
 r = 2 # Inflation Parameter
@@ -131,16 +132,13 @@ r = 2 # Inflation Parameter
 # 1. Input is an un-directed graph, power parameter e, and inflation parameter r.
 graph = Graph(directed = False)
 
-# graph.generate_random_connected_graph(num_nodes = n_nodes, num_edges = n_edge)
-
-g = Graph(directed=False)
-
-graph = Graph(directed=False)
+graph.generate_random_connected_graph(num_nodes = n_nodes, num_edges = n_edge)
 
 # Add all nodes (1 to 12)
 for i in range(1, 13):
     graph.add_node(i)
 
+'''
 # Add edges based on the adjacency list
 graph.add_edge(1, 1)
 graph.add_edge(1, 2)
@@ -185,6 +183,7 @@ graph.add_edge(11, 11)
 graph.add_edge(11, 12)
 
 graph.add_edge(12, 12)
+'''
 
 '''
 # 2. Create the associated matrix
@@ -224,7 +223,11 @@ for j in range(n_nodes):
 
 '''
 
+
+start = time.time()
 MarkovMatrix = MarkovCluster(graph, e, r)
+end = time.time()
 
 print("Adjacency Matrix of Last Iteration")
 print_matrix(MarkovMatrix)
+print(f"Waktu eksekusi: {end - start:.4f} detik")
