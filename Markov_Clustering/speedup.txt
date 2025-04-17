@@ -16,4 +16,4 @@ busur = 700
 simpul = 1000
 busur = 1200
 	sekuensial = 153.2840 detik
-	paralel = 2.0826 detik
+	paralel = 703.848 detik
