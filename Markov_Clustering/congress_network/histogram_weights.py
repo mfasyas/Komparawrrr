@@ -10,7 +10,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 from scipy.stats import lognorm
 
-f = open('congress_network_data.json')
+f = open('F:\\Coding\\Komparawrrr\\Markov_Clustering\\congress_network\\congress_network_data.json')
 data = json.load(f)
 
 inList = data[0]['inList']
