@@ -1,5 +1,5 @@
 import numpy as np
-from graph import Graph
+from Markov_Clustering.testing_purposes.graph import Graph
 import time 
 
 
